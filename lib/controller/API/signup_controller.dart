@@ -12,11 +12,15 @@ class SignupController extends GetxController {
   var isLoading = false.obs;
   final storage = GetStorage(); // ✅ GetStorage instance
 
-  Future<void> signup({required String email,required String name,  required String password}) async {
+  Future<void> signup({
+    required String email,
+    required String name,
+    required String password,
+  }) async {
     try {
       isLoading(true);
 
-      var map = {"email": email,"name": name, "password": password};
+      var map = {"email": email, "name": name, "password": password};
 
       var response = await http.post(
         Uri.parse(ApiService.signup),
@@ -24,25 +28,35 @@ class SignupController extends GetxController {
         body: jsonEncode(map),
       );
 
+      var responseBody = jsonDecode(response.body); // ✅ একবারই decode
+
       if (response.statusCode == 200) {
-        var responseBody = jsonDecode(response.body);
-
         if (responseBody['success'] == true) {
-          // ✅ Save token using GetStorage
-         // storage.write('accessToken', responseBody['data']['accessToken']);
-
-          // ✅ Show success snackbar
+          // ✅ Signup success হলে snackbar দেখাবে
           Get.snackbar(
             "Sign Up Success",
-            responseBody['message'] ?? "Welcome back!",
+            responseBody['message'] ?? "Welcome!",
             backgroundColor: Colors.green,
             colorText: Colors.white,
             snackPosition: SnackPosition.BOTTOM,
           );
 
-          // ✅ Navigate to HomePage
-          Get.toNamed("/login");
-        } else {
+          // ✅ Login এ redirect
+          Get.offNamed("/login");
+        }
+        else if (responseBody['message'] == "User already exists with this email") {
+          // ✅ যদি user আগে থেকেই থাকে
+          Get.snackbar(
+            "Account Exists",
+            responseBody['message'],
+            backgroundColor: Colors.orange,
+            colorText: Colors.white,
+            snackPosition: SnackPosition.BOTTOM,
+          );
+          Get.offNamed("/login");
+        }
+        else {
+          // ✅ অন্য error হলে
           Get.snackbar(
             "Signup Failed",
             responseBody['message'] ?? "Invalid credentials",
@@ -51,10 +65,23 @@ class SignupController extends GetxController {
             snackPosition: SnackPosition.BOTTOM,
           );
         }
-      } else {
+      }
+      // 🔹 এখানে নতুন condition add করা হলো
+      else if (response.statusCode == 403 &&
+          responseBody['message'] == "User already exists with this email") {
+        Get.snackbar(
+          "Account Exists",
+          responseBody['message'],
+          backgroundColor: Colors.orange,
+          colorText: Colors.white,
+          snackPosition: SnackPosition.BOTTOM,
+        );
+        Get.toNamed("/login");
+      }
+      else {
         Get.snackbar(
           "Error",
-          "Something went wrong",
+          "Something went wrong: ${response.statusCode}",
           backgroundColor: Colors.red,
           colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM,
