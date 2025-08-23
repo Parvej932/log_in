@@ -9,7 +9,7 @@ import 'Page/log_in_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-//  await GetStorage.init(); // ✅ Storage initialize
+  await GetStorage.init(); // ✅ Storage initialize
 
   runApp(MyApp());
 }
