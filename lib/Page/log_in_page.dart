@@ -3,38 +3,48 @@ import 'package:get/get.dart';
 
 
 import '../controller/log_in_controller.dart';
+import '../utils/custom_text.dart';
+import '../utils/custom_text_field.dart';
+import '../utils/custom_button.dart';
 
 class LoginPage extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final loginController = Get.put(LoginController()); // ✅ instance
+
+  final loginController = Get.put(LoginController());
+
+  LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: AppBar(title: const CustomText(text: "Login", fontSize: 20, fontWeight: FontWeight.bold)),
       body: Obx(() {
         if (loginController.isLoading.value) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else {
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
+                CustomTextField(
                   controller: emailController,
-                  decoration: InputDecoration(labelText: "Email"),
+                  hintText: "Enter Email",
+                  prefixIcon: Icons.email,
                 ),
-                TextField(
+                const SizedBox(height: 16),
+                CustomTextField(
                   controller: passwordController,
-                  decoration: InputDecoration(labelText: "Password"),
+                  hintText: "Enter Password",
+                  prefixIcon: Icons.lock,
                   obscureText: true,
                 ),
-                SizedBox(height: 20),
-                ElevatedButton(
+                const SizedBox(height: 24),
+                CustomButton(
+                  text: "Login",
                   onPressed: () {
-                    if (emailController.text.isEmpty ||
-                        passwordController.text.isEmpty) {
+                    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
                       Get.snackbar(
                         "Warning",
                         "All fields are required",
@@ -42,14 +52,22 @@ class LoginPage extends StatelessWidget {
                         colorText: Colors.white,
                       );
                     } else {
-                      /// ✅ Correct way: instance method ব্যবহার
                       loginController.login(
                         email: emailController.text,
                         password: passwordController.text,
                       );
                     }
                   },
-                  child: Text("Login"),
+                ),
+                const SizedBox(height: 12),
+                TextButton(
+                  onPressed: () {
+                    Get.toNamed("/signup");
+                  },
+                  child: const CustomText(
+                    text: "Don't have an account? Sign up",
+                    color: Colors.blue,
+                  ),
                 ),
               ],
             ),
@@ -59,4 +77,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-

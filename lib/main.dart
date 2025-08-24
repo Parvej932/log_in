@@ -5,11 +5,14 @@ import 'package:log_in/Page/signup_page.dart';
 
 import 'Page/home_page.dart';
 import 'Page/log_in_page.dart';
+import 'Page/my_task.dart';
+import 'Page/profile_page.dart';
+import 'controller/API/local_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await GetStorage.init(); // ✅ Storage initialize
+  await Get.putAsync(() => StorageService().init()); // ✅ Storage initialize
 
   runApp(MyApp());
 }
@@ -26,6 +29,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/signup", page: () => SignupPage()),
         GetPage(name: "/login", page: () => LoginPage()),
         GetPage(name: "/home", page: () => HomePage()),
+        GetPage(name: "/task", page: () => TaskPage()),
+        GetPage(name: "/profile", page: () => ProfilePage()),
       ],
     );
   }

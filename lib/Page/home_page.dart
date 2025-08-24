@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:log_in/utils/custom_button.dart';
 
 class HomePage extends StatelessWidget {
   final storage = GetStorage();
@@ -16,6 +18,15 @@ class HomePage extends StatelessWidget {
           children: [
             Text("Hi I am Parvej"),
             Text("Access Token: $token"),
+            CustomButton(text: "Task", onPressed: (){
+              Get.toNamed("/task");
+            }),
+            CustomButton(text: "Task", onPressed: (){
+              Get.toNamed("/profile");
+            })
+
+
+
           ],
         ),
       ),

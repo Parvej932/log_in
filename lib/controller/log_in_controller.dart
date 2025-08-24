@@ -9,7 +9,7 @@ import 'api_service.dart';
 
 class LoginController extends GetxController {
   var isLoading = false.obs;
- // final storage = GetStorage(); // ✅ GetStorage instance
+  final storage = GetStorage(); // ✅ GetStorage instance
 
   Future<void> login({required String email, required String password}) async {
     try {
@@ -28,7 +28,7 @@ class LoginController extends GetxController {
 
         if (responseBody['success'] == true) {
           // ✅ Save token using GetStorage
-        // storage.write('accessToken', responseBody['data']['accessToken']);
+         storage.write('accessToken', responseBody['data']['accessToken']);
 
           // ✅ Show success snackbar
           Get.snackbar(

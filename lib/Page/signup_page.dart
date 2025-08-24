@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 import '../controller/API/signup_controller.dart';
+import '../controller/text_field_controler.dart';
+import '../utils/custom_text.dart';
+import '../utils/custom_text_field.dart';
+import '../utils/custom_button.dart';
 
 class SignupPage extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
   final signupController = Get.put(SignupController());
+  final AuthController controller = Get.put(AuthController());
 
   SignupPage({super.key}); // ✅ instance
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Sign Up")),
+      appBar: AppBar(title: CustomText(text: "Sign Up", fontSize: 20, fontWeight: FontWeight.bold)),
       body: Obx(() {
         if (signupController.isLoading.value) {
           return Center(child: CircularProgressIndicator());
@@ -24,21 +28,26 @@ class SignupPage extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                TextField(
+                CustomTextField(
                   controller: emailController,
-                  decoration: InputDecoration(labelText: "Email"),
+                  hintText: 'Enter your email',
+                  prefixIcon: Icons.email,
+                  keyboardType: TextInputType.emailAddress,
                 ),
-                TextField(
+                CustomTextField(
                   controller: nameController,
-                  decoration: InputDecoration(labelText: "Enter your name"),
+                  hintText: 'Enter your name',
+                  prefixIcon: Icons.person,
                 ),
-                TextField(
+                CustomTextField(
                   controller: passwordController,
-                  decoration: InputDecoration(labelText: "Password"),
+                  hintText: 'Password',
+                  prefixIcon: Icons.lock,
                   obscureText: true,
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(
+                CustomButton(
+                  text: "Signup",
                   onPressed: () {
                     if (emailController.text.isEmpty ||
                         passwordController.text.isEmpty) {
@@ -49,15 +58,13 @@ class SignupPage extends StatelessWidget {
                         colorText: Colors.white,
                       );
                     } else {
-                      /// ✅ Correct way: instance method ব্যবহার
                       signupController.signup(
                         email: emailController.text,
                         password: passwordController.text,
-                          name: nameController.text
+                        name: nameController.text,
                       );
                     }
                   },
-                  child: Text("Signup"),
                 ),
               ],
             ),
@@ -67,4 +74,3 @@ class SignupPage extends StatelessWidget {
     );
   }
 }
-
