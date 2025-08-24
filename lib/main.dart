@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:log_in/Page/bottom_view.dart';
 import 'package:log_in/Page/signup_page.dart';
 
 import 'Page/home_page.dart';
 import 'Page/log_in_page.dart';
 import 'Page/my_task.dart';
+import 'Page/profile_info.dart';
 import 'Page/profile_page.dart';
 import 'controller/API/local_storage.dart';
 
@@ -28,9 +30,9 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: "/signup", page: () => SignupPage()),
         GetPage(name: "/login", page: () => LoginPage()),
-        GetPage(name: "/home", page: () => HomePage()),
-        GetPage(name: "/task", page: () => TaskPage()),
-        GetPage(name: "/profile", page: () => ProfilePage()),
+        GetPage(name: "/bottom",page: () => BottomView()),
+        GetPage(name: "/task", page: () => AddTaskPage()),
+        GetPage(name: "/profile", page: () => ProfilePage()),GetPage(name: "/ProfileInfoe", page: () => ProfileInfo()),
       ],
     );
   }

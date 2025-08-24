@@ -1,30 +1,31 @@
-// lib/controllers/profile_controller.dart
 import 'package:get/get.dart';
-import 'package:log_in/controller/api_service.dart';
-import 'package:log_in/utils/app_colour.dart';
 
-import 'base_client.dart';
+import '../../utils/user_model.dart';
 
 
 class ProfileController extends GetxController {
-  var profileData = {}.obs;
-  var isLoading = false.obs;
+  var user = UserModel(
+    name: "safin",
+    email: "safinislam0804@gmail.com",
+    address: "No Address Provided", // API did not provide
+    profile: null,
+  ).obs;
 
+  // Simulate API fetch
   void fetchProfile() async {
-    try {
-      isLoading(true);
-      var response = await BaseClient.getRequest(api: ApiService.profile);
-      var data = await BaseClient.handleResponse(response);
+    await Future.delayed(Duration(seconds: 1)); // simulate loading
+    // Normally you'd fetch from API here
+    user.value = UserModel.fromJson({
+      "name": "safin",
+      "email": "safinislam0804@gmail.com",
+      "address": "No Address Provided",
+      "profile": null
+    });
+  }
 
-      if (data['success'] == true && data['data'] != null) {
-        profileData.value = Map<String, dynamic>.from(data['data']);
-      } else {
-        profileData.clear();
-      }
-    } catch (e) {
-      Get.snackbar("Error", "$e");
-    } finally {
-      isLoading(false);
-    }
+  @override
+  void onInit() {
+    fetchProfile();
+    super.onInit();
   }
 }

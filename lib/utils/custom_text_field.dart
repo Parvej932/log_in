@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'app_colour.dart';
 // CustomTextField
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -7,7 +9,9 @@ class CustomTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final TextInputType keyboardType;
+  final Color? backgroundColor;
   final double? widthFactor;
+  final double? height;
 
   const CustomTextField({
     super.key,
@@ -18,6 +22,9 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
     this.widthFactor,
+    this.height =40,
+    this.backgroundColor = AppColors.SoftBrandColor,
+
   });
 
   @override
@@ -33,8 +40,10 @@ class CustomTextField extends StatelessWidget {
           prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
           suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
           border: OutlineInputBorder(
+
             borderRadius: BorderRadius.circular(12),
           ),
+
           contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
       ),

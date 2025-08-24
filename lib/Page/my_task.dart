@@ -1,99 +1,62 @@
-// lib/pages/task_page.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controller/task_controller.dart';
 
 
-// lib/pages/task_page.dart
-
-
-class TaskPage extends StatelessWidget {
-  final TaskController controller = Get.put(TaskController());
-  final TextEditingController titleController = TextEditingController();
-  final TextEditingController descController = TextEditingController();
+class AddTaskPage extends StatelessWidget {
+  const AddTaskPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchTasks();
+    final TaskController taskController = Get.find<TaskController>();
+
+    final titleController = TextEditingController();
+    final descController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: Text("Task CRUD")),
-      body: Obx(() {
-        if (controller.taskList.isEmpty) {
-          return Center(child: Text("No tasks found"));
-        }
-
-        return ListView.builder(
-          itemCount: controller.taskList.length,
-          itemBuilder: (context, index) {
-            final task = controller.taskList[index];
-            return ListTile(
-              title: Text(task['title'] ?? ""),
-              subtitle: Text(task['description'] ?? ""),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  IconButton(
-                    icon: Icon(Icons.edit),
-                    onPressed: () {
-                      titleController.text = task['title'] ?? "";
-                      descController.text = task['description'] ?? "";
-
-                      Get.defaultDialog(
-                        title: "Edit Task",
-                        content: Column(
-                          children: [
-                            TextField(controller: titleController, decoration: InputDecoration(labelText: "Title")),
-                            TextField(controller: descController, decoration: InputDecoration(labelText: "Description")),
-                          ],
-                        ),
-                        confirm: ElevatedButton(
-                          child: Text("Update"),
-                          onPressed: () {
-                            controller.editTask(task['_id'], titleController.text, descController.text);
-                            Get.back();
-                          },
-                        ),
-                      );
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () {
-                      controller.deleteTask(task['_id']);
-                    },
-                  ),
-                ],
+      appBar: AppBar(title: const Text("Add Task")),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                labelText: "Task Title",
+                border: OutlineInputBorder(),
               ),
-            );
-          },
-        );
-      }),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-          titleController.clear();
-          descController.clear();
-
-          Get.defaultDialog(
-            title: "Create Task",
-            content: Column(
-              children: [
-                TextField(controller: titleController, decoration: InputDecoration(labelText: "Title")),
-                TextField(controller: descController, decoration: InputDecoration(labelText: "Description")),
-              ],
             ),
-            confirm: ElevatedButton(
-              child: Text("Create"),
+            const SizedBox(height: 12),
+            TextField(
+              controller: descController,
+              decoration: const InputDecoration(
+                labelText: "Description",
+                border: OutlineInputBorder(),
+              ),
+              maxLines: 3,
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(double.infinity, 50)),
               onPressed: () {
-                controller.createTask(titleController.text, descController.text);
-                Get.back();
+                if (titleController.text.isNotEmpty &&
+                    descController.text.isNotEmpty) {
+                  taskController.createTask(
+                      titleController.text, descController.text);
+
+                  Get.back(); // হোম পেজে ফেরত যাবে
+                } else {
+                  Get.snackbar("Error", "Please fill all fields");
+                }
               },
-            ),
-          );
-        },
+              child: const Text("Save Task"),
+            )
+          ],
+        ),
       ),
     );
   }
 }
+

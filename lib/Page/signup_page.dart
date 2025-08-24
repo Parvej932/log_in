@@ -26,6 +26,7 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.AppBackground,
       body: Obx(() {
         if (signupController.isLoading.value) {
           return Center(child: CircularProgressIndicator());
@@ -37,39 +38,39 @@ class SignupPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PrimaryText(text: 'Create Your Account', fontSize: 30,),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1),
                   SecondaryText(text: "Join Task Manager today — organize better, work smarter, and stay in control of your day.", textAlign: TextAlign.start, fontSize: 14,),
-                  SizedBox(height: 25),
+                  SizedBox(height: 15),
                   PrimaryText(text: 'First Name',),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1),
                   CustomTextField(hintText: 'e.g. Kristin ', controller: firstNameController,),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   PrimaryText(text: 'Last Name',),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1),
                   CustomTextField(hintText: 'e.g. Cooper', controller: lastNameController,),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   PrimaryText(text: 'Email Address',),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1),
                   CustomTextField(hintText: 'e.g. kristin.cooper@example.com', controller: emailController,),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   PrimaryText(text: 'Address',),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1),
                   CustomTextField(hintText: 'e.g. 1234 Elm Street, Springfield, IL', controller: addressController,),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   PrimaryText(text: 'PassWord',),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1),
                   CustomTextField(
                       hintText: "••••••••",
                       suffixIcon: Icons.visibility_off, controller: passwordController,
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 10),
                   PrimaryText(text: ' Confirm password',),
-                  SizedBox(height: 5),
+                  SizedBox(height: 1),
                   CustomTextField(
                       hintText: "••••••••",
                       suffixIcon: Icons.visibility_off, controller: confirmPasswordController,
                   ),
-                  SizedBox(height: 5),
+                  SizedBox(height: 3),
                   Row(
                     children: [
                       IconButton(onPressed: (){}, icon:Icon(Icons.check_box_outline_blank)),
@@ -77,7 +78,7 @@ class SignupPage extends StatelessWidget {
               
                     ],
                   ),
-                  SizedBox(height: 25),
+                  SizedBox(height: 15),
                   Row(
                     children: [
                       Expanded(
@@ -105,11 +106,14 @@ class SignupPage extends StatelessWidget {
                     ],
                   ),
 
-                  SizedBox(height: 35),
+                  SizedBox(height: 15),
                   Row(
                     children: [
                       CustomText(text: "Already have an account?"),
                       InkWell(
+                        onTap: () {
+                          Get.toNamed("/login");
+                        },
                           child: CustomText(text: " Log In",fontWeight: FontWeight.w500, color: AppColors.BrandColor,))
                     ],
                   ),

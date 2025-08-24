@@ -40,7 +40,7 @@ class LoginController extends GetxController {
           );
 
           // ✅ Navigate to HomePage
-          Get.toNamed("/home");
+          Get.toNamed("/bottom");
         } else {
           Get.snackbar(
             "Login Failed",
