@@ -37,6 +37,7 @@ dependencies:
   get:
   http:
   get_storage:
+  google_fonts:
 
 dev_dependencies:
   flutter_test:

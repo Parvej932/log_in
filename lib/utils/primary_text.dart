@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'app_colour.dart';
 
-class CustomText extends StatelessWidget {
+class PrimaryText extends StatelessWidget {
   final String text;
   final double? fontSize;
   final FontWeight? fontWeight;
@@ -13,7 +13,7 @@ class CustomText extends StatelessWidget {
   final int? maxLines;
   final TextOverflow? overflow;// Optional override
 
-  const CustomText({
+  const PrimaryText({
     super.key,
     required this.text,
     this.fontSize,
@@ -31,8 +31,8 @@ class CustomText extends StatelessWidget {
     final defaultStyle = GoogleFonts.poppins(
       textStyle: TextStyle(
         fontSize: fontSize ?? 14,
-        fontWeight: fontWeight ?? FontWeight.w400,
-        color: color ?? AppColors.ColorGrey700,
+        fontWeight: fontWeight ?? FontWeight.w500,
+        color: color ?? AppColors.PrimaryText,
       ),
     );
 
@@ -40,8 +40,8 @@ class CustomText extends StatelessWidget {
     final customStyle = TextStyle(
       fontFamily: fontFamily,
       fontSize: fontSize ?? 14,
-      fontWeight: fontWeight ?? FontWeight.w400,
-      color: color ?? AppColors.ColorGrey700,
+      fontWeight: fontWeight ?? FontWeight.w500,
+      color: color ?? AppColors.PrimaryText,
     );
 
     return Text(
@@ -53,3 +53,4 @@ class CustomText extends StatelessWidget {
     );
   }
 }
+

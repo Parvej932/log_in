@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// CustomTextField
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final TextInputType keyboardType;
+  final double? widthFactor;
 
   const CustomTextField({
     super.key,
@@ -16,6 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
+    this.widthFactor,
   });
 
   @override
