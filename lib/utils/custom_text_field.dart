@@ -11,7 +11,9 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final Color? backgroundColor;
   final double? widthFactor;
-  final double? height;
+  final double? height ;
+  final int? maxLines;
+  final int? minLine;
 
   const CustomTextField({
     super.key,
@@ -22,8 +24,10 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.keyboardType = TextInputType.text,
     this.widthFactor,
-    this.height =40,
+    this.height=40 ,
     this.backgroundColor = AppColors.SoftBrandColor,
+    this.maxLines =5,
+    this.minLine=1,
 
   });
 
@@ -31,7 +35,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Card(
-        elevation: 7,
+        elevation: 5,
         child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: TextField(

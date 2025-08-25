@@ -29,7 +29,7 @@ class AddTaskPage extends StatelessWidget {
             CustomTextField(controller: titleController, hintText: "e.g. Design Landing Page Header"),
             PrimaryText(text: 'Description',),
             SizedBox(height: 5),
-            CustomTextField(controller: descController, hintText: "e.g. Include logo, navigation, and CTA button with brand color"),
+            CustomTextField(controller: descController, hintText: "e.g. Include logo, navigation, and CTA button with brand color", ),
              SizedBox(height: 15,),
             CustomButton(text: "Save Task", onPressed: (){
               if (titleController.text.isNotEmpty &&
