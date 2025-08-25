@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:log_in/utils/primary_text.dart';
+import 'package:log_in/utils/secondary_text.dart';
 
 import '../controller/task_controller.dart';
 
@@ -30,35 +32,25 @@ class HomePage extends StatelessWidget {
             final task = taskController.taskList[index];
             return Card(
               margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              elevation: 3,
+              elevation: 10,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12)),
-              child: ListTile(
-                title: Text(
-                  task['title'] ?? "No Title",
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+              child:Stack(children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage("assets/images/s1.png"), fit: BoxFit.cover)
+                  ),
                 ),
-                subtitle: Text(task['description'] ?? "No Description"),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: const Icon(Icons.edit, color: Colors.green),
-                      onPressed: () {
-                        // 🟢 Edit Task page এ নিয়ে যাবে
-                        // তুমি চাইলে Get.to(EditTaskPage(task: task));
-                      },
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.delete, color: Colors.red),
-                      onPressed: () {
-                        taskController.deleteTask(task['_id']);
-                      },
-                    ),
-                  ],
+              ListTile(
+                title: PrimaryText(
+                    text: "${task['title'] ?? ''} ",
                 ),
-              ),
+                subtitle:  SecondaryText(
+            text: " Name: ${task['description'] ?? ''} ",
+            ),
+
+
+              ),]),
             );
           },
         );

@@ -29,24 +29,25 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          hintText: hintText,
-          prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-          suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
-          border: OutlineInputBorder(
+    return
+      Card(
+        elevation: 7,
+        child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: TextField(
+          controller: controller,
+          obscureText: obscureText,
+          keyboardType: keyboardType,
+          decoration: InputDecoration(
+            hintText: hintText,
+            prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+            suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
+           border: InputBorder.none,
 
-            borderRadius: BorderRadius.circular(12),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           ),
-
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
-      ),
-    );
+            ),
+      );
   }
 }

@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
         GetPage(name: "/login", page: () => LoginPage()),
         GetPage(name: "/bottom",page: () => BottomView()),
         GetPage(name: "/task", page: () => AddTaskPage()),
-        GetPage(name: "/profile", page: () => ProfilePage()),GetPage(name: "/ProfileInfoe", page: () => ProfileInfo()),
+        GetPage(name: "/profile", page: () => ProfilePage()),
+        GetPage(name: "/ProfileInfoe", page: () => ProfileInfo()),
       ],
     );
   }
